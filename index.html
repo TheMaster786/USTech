@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbics Tech Consulting | IT solutions inspired by TechSystems</title>
+    <!-- Font Awesome for icons (optional but used for "back to top" & blue dot feel) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0b1e33;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* ---------- header / nav (inspired by TechSystems top bar) ---------- */
+        .top-bar {
+            background-color: #0a1c2f;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 5%;
+            font-size: 0.9rem;
+            border-bottom: 3px solid #2d7ee7;
+        }
+
+        .top-contact span {
+            margin-right: 2rem;
+            color: #bfd9ff;
+        }
+
+        .top-contact i {
+            margin-right: 0.4rem;
+            color: #5a9cff;
+        }
+
+        .top-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.8rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .top-links a:hover {
+            color: #7db1ff;
+        }
+
+        .logo-area {
+            background-color: #112b44;
+            padding: 1rem 5%;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            border-bottom: 1px solid #1e3a5a;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: white;
+        }
+
+        .logo span {
+            color: #4e9eff;
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            color: #d3e5ff;
+            text-decoration: none;
+            font-size: 1.05rem;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* ---------- VIDEO HERO (full bleed) ---------- */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 90vh; /* full bleed but leaving some space for bottom content */
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none; /* allow overlay interaction */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(75deg, rgba(6, 22, 45, 0.8) 0%, rgba(10, 35, 70, 0.6) 50%, rgba(0, 40, 80, 0.4) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100%;
+            color: white;
+            padding: 0 8%;
+            max-width: 900px;
+        }
+
+        .hero-content h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #d3e6ff;
+        }
+
+        .hero-content h1 {
+            font-size: 4.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .hero-content h1 span {
+            color: #7cb2ff;
+            display: block;
+            font-size: 3.2rem;
+            font-weight: 300;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            max-width: 650px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-hero {
+            background-color: #2563eb;
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 12px 25px -10px #1e3a8a;
+            transition: background 0.2s, transform 0.2s;
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-hero:hover {
+            background-color: #1e4fd0;
+            transform: scale(1.02);
+        }
+
+        /* ---------- services grid (identical layout to TechSystems) ---------- */
+        .services-section {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0a2540;
+        }
+
+        .section-sub {
+            color: #446688;
+            font-size: 1.3rem;
+            margin-bottom: 3.5rem;
+            border-left: 5px solid #2563eb;
+            padding-left: 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #f2f7ff;
+            border-radius: 24px;
+            padding: 2rem 1.8rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            box-shadow: 0 8px 15px rgba(0,30,60,0.04);
+            position: relative;
+        }
+
+        .service-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 20px 28px -10px #1e3a8a33;
+            background: #ffffff;
+        }
+
+        .service-card h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #113355;
+            margin-bottom: 0.75rem;
+            border-bottom: 2px dotted #a5c9ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .service-desc {
+            color: #1f3a5f;
+            margin-bottom: 1.8rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* ---------- "blue dot" interactive button area (Learn more container) ---------- */
+        .learnmore-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .blue-dots {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            background-color: #2563eb;
+            border-radius: 50%;
+            transition: transform 0.15s, background 0.15s;
+            box-shadow: 0 2px 6px #2563eb80;
+        }
+
+        .learnmore-container:hover .dot {
+            transform: scale(1.25);
+            background-color: #ff9f4b; /* changes to warm tone on hover, but stays blue dot until hover */
+        }
+
+        .learnmore-container:hover .dot {
+            background-color: #1e4fd0;
+        }
+
+        /* make it extra obvious they are clickable */
+        .learn-trigger {
+            font-weight: 600;
+            color: #1e4fd0;
+            letter-spacing: 0.3px;
+            border: 1px solid transparent;
+            padding: 6px 14px;
+            border-radius: 40px;
+            background: rgba(37,99,235,0.04);
+            transition: background 0.2s;
+        }
+
+        .learnmore-container:hover .learn-trigger {
+            background: #e3eeff;
+        }
+
+        /* hidden learn more box that appears when the container is clicked (we'll use JS) */
+        .learn-more-box {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin 0.2s;
+            background: #f1f9ff;
+            border-radius: 18px;
+            margin-top: 0;
+            width: 100%;
+            font-size: 0.95rem;
+            color: #1b3a62;
+            border-left: 4px solid #2563eb;
+        }
+
+        .learn-more-box.show {
+            max-height: 200px; /* enough for short text */
+            margin-top: 1.4rem;
+            padding: 1rem 1.5rem;
+        }
+
+        .learn-more-box p {
+            margin: 0.25rem 0;
+        }
+
+        .learn-more-box i {
+            color: #2d7ee7;
+            margin-right: 6px;
+        }
+
+        /* ---------- featured section (like memkeepers etc) ---------- */
+        .featured-section {
+            background: linear-gradient(145deg, #f0f5fe, #ffffff);
+            padding: 4rem 5%;
+            border-top: 1px solid #ccdfff;
+        }
+
+        .featured-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+        }
+
+        .featured-item {
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            max-width: 300px;
+            box-shadow: 0 10px 20px rgba(0,33,70,0.07);
+            border: 1px solid #b9d6ff;
+        }
+
+        .featured-item h4 {
+            font-size: 1.7rem;
+            color: #1e3f70;
+        }
+
+        .review-box {
+            background: #0f2a46;
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .review-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
+        }
+
+        .review {
+            max-width: 260px;
+            font-style: italic;
+            background: #1a3857;
+            padding: 1.6rem;
+            border-radius: 2rem;
+        }
+
+        .review i {
+            color: #f5b342;
+        }
+
+        /* ---------- footer / bottom ---------- */
+        footer {
+            background-color: #0e223a;
+            color: #d1e2fc;
+            padding: 3rem 5% 1.5rem;
+        }
+
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #b5d0ff;
+            text-decoration: none;
+            margin-right: 2.2rem;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social a {
+            color: #c7dbff;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #1e4172;
+            padding-top: 2rem;
+            font-size: 0.95rem;
+        }
+
+        /* back to top button fixed at bottom right */
+        #backToTop {
+            position: fixed;
+            bottom: 2.8rem;
+            right: 2.5rem;
+            background-color: #2563eb;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 20px #0b2d5e;
+            cursor: pointer;
+            border: none;
+            z-index: 999;
+            transition: 0.2s;
+            border: 2px solid white;
+            opacity: 0.9;
+        }
+
+        #backToTop:hover {
+            background-color: #164bbf;
+            transform: scale(1.1);
+        }
+
+        /* responsive tweaks */
+        @media (max-width: 700px) {
+            .hero-content h1 { font-size: 2.8rem; }
+            .top-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- top bar with contact & USA regions (like original) -->
+    <div class="top-bar">
+        <div class="top-contact">
+            <span><i class="fas fa-envelope"></i> support@orbics.tech</span>
+            <span><i class="fas fa-phone-alt"></i> 800-807-9988</span>
+        </div>
+        <div class="top-links">
+            <a href="#">Service Regions</a>
+            <a href="#">USA</a>
+            <a href="#">Tools</a>
+            <a href="#">Know-How</a>
+            <a href="#">Service Ticket</a>
+        </div>
+    </div>
+
+    <!-- logo & nav -->
+    <div class="logo-area">
+        <div class="logo">ORBICS<span> tech consulting</span></div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Tools</a>
+            <a href="#">Know-How</a>
+            <a href="#">Service Ticket</a>
+        </div>
+    </div>
+
+    <!-- VIDEO HERO (full bleed, GitHub hosted video) -->
+    <section class="hero" id="top">
+        <!-- video.mp4 from GitHub – replace with your actual raw URL -->
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="https://github.com/username/repository/raw/main/video.mp4" type="video/mp4">
+            <!-- fallback: if video fails, show solid color -->
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>Welcome to</h2>
+            <h1>ORBICS TECH <span>CONSULTING</span></h1>
+            <p>We are your partner for IT solutions. We provide IT services businesses love and become the answer to your technical problems.</p>
+            <a href="#" class="btn-hero">Contact Us to Get Started →</a>
+        </div>
+    </section>
+
+    <!-- services section (identical cards + blue dots / learn more) -->
+    <section class="services-section">
+        <h2 class="section-title">IT solutions that keep you efficient</h2>
+        <div class="section-sub">Monthly support subscriptions with up to 40% discounts! + extended hours</div>
+
+        <div class="services-grid">
+            <!-- card 1 -->
+            <div class="service-card">
+                <h3>IT Services & End User Support</h3>
+                <div class="service-desc">We support everything computer related: servers, computers, mobile devices, network routers & switches, PCs & Macs. Save up to 40%...</div>
+                <!-- blue dot interactive area (learn more) -->
+                <div class="learnmore-container" onclick="toggleLearn(this)">
+                    <div class="blue-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="learn-trigger"><i class="fas fa-arrow-right" style="font-size:0.8rem;"></i> discover more</span>
+                    <div class="learn-more-box">
+                        <p><i class="fas fa-check-circle"></i> 24/7 support, on-site & remote. 40% discount on annual plans.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- card 2 -->
+            <div class="service-card">
+                <h3>Security - Network & Endpoint</h3>
+                <div class="service-desc">At network level we ensure security via a business class advanced firewall and encrypted VPN tunnels to all outside connections...</div>
+                <div class="learnmore-container" onclick="toggleLearn(this)">
+                    <div class="blue-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="learn-trigger"><i class="fas fa-arrow-right"></i> learn more</span>
+                    <div class="learn-more-box">
+                        <p><i class="fas fa-shield-alt"></i> Next-gen firewall, endpoint detection, 24/7 monitoring.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- card 3 -->
+            <div class="service-card">
+                <h3>WIFI Network</h3>
+                <div class="service-desc">We offer Wi-Fi with no upfront cost to you! A choice of vendors – Cambium, Ruckus, Aruba, Meraki, Ubiquiti. Can be scaled...</div>
+                <div class="learnmore-container" onclick="toggleLearn(this)">
+                    <div class="blue-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="learn-trigger">more</span>
+                    <div class="learn-more-box">
+                        <p><i class="fas fa-wifi"></i> Cloud-managed WiFi, zero upfront cost, mesh extenders.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- card 4 -->
+            <div class="service-card">
+                <h3>Cloud Services & Web Apps</h3>
+                <div class="service-desc">From local servers to VMs on AWS cloud. Web Apps running on any device & web printing. VPN & remote access...</div>
+                <div class="learnmore-container" onclick="toggleLearn(this)">
+                    <div class="blue-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="learn-trigger">learn more</span>
+                    <div class="learn-more-box">
+                        <p><i class="fas fa-cloud"></i> AWS, Azure, hybrid cloud. web apps & secure remote.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- card 5 -->
+            <div class="service-card">
+                <h3>Data Backup & Recovery</h3>
+                <div class="service-desc">Our backup solutions start at $25 per month. Backups run continuously or on schedule. Encrypted end-to-end...</div>
+                <div class="learnmore-container" onclick="toggleLearn(this)">
+                    <div class="blue-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="learn-trigger">learn more</span>
+                    <div class="learn-more-box">
+                        <p><i class="fas fa-database"></i> $25/mo, immutable backups, instant recovery.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- card 6: Email Hosting -->
+            <div class="service-card">
+                <h3>Email Hosting & Collaboration</h3>
+                <div class="service-desc">Microsoft Exchange Online or Google Workspace. Backups, archiving, anti-spam, additional security...</div>
+                <div class="learnmore-container" onclick="toggleLearn(this)">
+                    <div class="blue-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="learn-trigger">learn more</span>
+                    <div class="learn-more-box">
+                        <p><i class="fas fa-envelope-open-text"></i> Exchange & Gmail hosting, 99.9% uptime.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- card 7: VOIP -->
+            <div class="service-card">
+                <h3>VOIP Telephone Systems</h3>
+                <div class="service-desc">PRICE: Plans start at $19.95, unlimited calling. SCALABILITY: One line or dozens of extensions...</div>
+                <div class="learnmore-container" onclick="toggleLearn(this)">
+                    <div class="blue-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="learn-trigger">learn more</span>
+                    <div class="learn-more-box">
+                        <p><i class="fas fa-phone"></i> $19.95 unlimited, call groups, music on hold.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- card 8: QuickBooks -->
+            <div class="service-card">
+                <h3>QuickBooks Hosted Solution</h3>
+                <div class="service-desc">Full QuickBooks versions: Pro, Premier, Enterprise. Bring your QB license. Access from anywhere...</div>
+                <div class="learnmore-container" onclick="toggleLearn(this)">
+                    <div class="blue-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="learn-trigger">learn more</span>
+                    <div class="learn-more-box">
+                        <p><i class="fas fa-calculator"></i> Hosted QuickBooks, any device, multi-user.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- featured section (awards, memkeepers etc) -->
+    <section class="featured-section">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+            <h2 style="font-size: 2.4rem;">2025 Best IT Support & Services Award</h2>
+            <p style="color:#2563eb;">— Orbics Tech Consulting, honored by clients —</p>
+        </div>
+        <div class="featured-grid">
+            <div class="featured-item">
+                <h4>📸 memkeepers.me</h4>
+                <p>Share stories, photos, videos. Virtual remembrance wall. Preserve memories.</p>
+            </div>
+            <div class="featured-item">
+                <h4>👥 People Lease</h4>
+                <p>Payroll & back-office services. Orbics provides IT security & end user support.</p>
+            </div>
+            <div class="featured-item">
+                <h4>⛪ Clinton Christian Academy</h4>
+                <p>M365 migration, network support, zero interruption.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- reviews -->
+    <div class="review-box">
+        <h2 style="color:white; font-weight:400;">What clients say</h2>
+        <div class="review-grid">
+            <div class="review"><i class="fas fa-star"></i> "Excellent service! The whole team is helpful and fast." – Jimmye S.</div>
+            <div class="review"><i class="fas fa-star"></i> "Orbics solved all our network problems, very patient." – Alan O.</div>
+            <div class="review"><i class="fas fa-star"></i> "Simply the best IT consulting we've ever had." – Dani P.</div>
+        </div>
+    </div>
+
+    <!-- footer (back to top button appears fixed) -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-links">
+                <a href="#">About us</a>
+                <a href="#">Partner with us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+                <a href="#">Privacy Disclosure</a>
+            </div>
+            <div class="social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2026 Orbics Tech Consulting – Let's Connect ➡️ support@orbics.tech | 800-807-9988</p>
+        </div>
+    </footer>
+
+    <!-- back to top button (always visible) -->
+    <div id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'});">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // function to toggle learn more box when clicking the container (blue dots + text)
+        function toggleLearn(element) {
+            // find the inner .learn-more-box inside the same container
+            const box = element.querySelector('.learn-more-box');
+            if (box) {
+                box.classList.toggle('show');
+            }
+        }
+
+        // optional: make dots clickable even if they already trigger via container
+        // attach to containers – we already have onclick on .learnmore-container
+        // also prevent event from bubbling if needed but fine
+
+        // ensure clicking on box doesn't toggle again (stopPropagation optional)
+        document.querySelectorAll('.learn-more-box').forEach(b => {
+            b.addEventListener('click', (e) => e.stopPropagation());
+        });
+
+        // set GitHub video – if you have a raw link, replace the source below.
+        // for demo, we keep fallback: if video fails, background is blue-black (hero overlay visible)
+        // you can replace video src with actual raw github url
+        const videoSource = document.querySelector('.hero-video source');
+        // For demonstration, we will set to a sample video if needed, but we keep your placeholder.
+        // In case you need to set it dynamically, uncomment:
+        // videoSource.src = "https://raw.githubusercontent.com/yourusername/yourrepo/main/video.mp4";
+        // videoSource.parentElement.load();
+    </script>
+
+    <!-- tiny note: to make back to top work on any scroll, it's fixed already -->
+</body>
+</html>
